@@ -3,18 +3,29 @@ import Header from "../components/Header";
 import ProductsDisplay from "../components/ProductsDisplay";
 
 function Products({productList}) {
-    // const appliances = productList;
-    const appliances = productList.slice(0,12);
-    const moreAppliances = productList.slice(12, (productList.length + 1));
-    console.log(appliances);
-    console.log(moreAppliances);
+
+    const [applianceList, setApplianceList] = React.useState(productList);
+    const updateApplianceList = (list) => setApplianceList(list);
 
     const [showMore, setShowMore] = React.useState(false);
+    const showMoreClicked = () => setShowMore(true)
 
     const [isQuickShip, setIsQuickShip] = React.useState(false);
+    const toggleQuickShip = () => setIsQuickShip(!isQuickShip);
 
     let applianceCategory = ['Gas Ranges', 'Vacuum Cleaners', 'Toaster Ovens'];
     let sortCriteria = ['Highest Price', 'Lowest Price', 'Top Rated', 'Best Sellers', 'In Stock' ]
+
+    React.useEffect(() => {
+        const quickShipOnly = () => { return productList.filter(sku =>
+            sku.is_quick_ship === true
+        )};
+
+        let filterResults = isQuickShip ? quickShipOnly() : productList;
+
+        updateApplianceList(filterResults);
+    }, [isQuickShip]);
+
 
     return (
         <div className="wrapper">
@@ -69,7 +80,7 @@ function Products({productList}) {
                             <div className="quickship-toggle">
                                 <input
                                     type="checkbox"
-                                    onClick={() => setIsQuickShip(!isQuickShip)}
+                                    onClick={toggleQuickShip}
                                 />
                                 <label htmlFor="quickship-toggle"> Quick Ship</label>
                             </div>
@@ -85,18 +96,16 @@ function Products({productList}) {
             </div>
 
             <div className="container products-display">
-                { !isQuickShip ?
-                    <ProductsDisplay list={appliances}/>
-                    : (<></>)
-                }
-                { showMore ? <ProductsDisplay list={moreAppliances}/> : (<></>)}
+                <ProductsDisplay list={applianceList}/>
+
+                {/*{ showMore ? <ProductsDisplay list={moreAppliances}/> : (<></>)}*/}
 
             </div>
 
             { !showMore ? (
                 <div className="btn more-btn">
                     <button
-                        onClick={() => setShowMore(true)}
+                        onClick={showMoreClicked}
                     >
                         Show More
                     </button>
