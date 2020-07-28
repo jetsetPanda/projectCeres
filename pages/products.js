@@ -65,7 +65,7 @@ function Products({productList}) {
                             </div>
                         </div>
                     </div>
-                    <div className="clear-btn">
+                    <div className="btn clear-btn">
                         <button>
                             Clear All
                         </button>
@@ -74,56 +74,59 @@ function Products({productList}) {
 
             </div>
 
-
-
-            <div className="container">
-                <div className="products-display">
-                    {appliances.map(appliance => {
-                        return (
-                            <div className="product-card">
-                                <div className="product-image">
-                                    <img
-                                        className="img img-raised round-radius"
-                                        src={`https://assets.ajmadison.com/${appliance.image.folder}/${appliance.image.filename}.jpg`}
-                                        width="305"
-                                        height="204"
-                                    ></img>
-                                </div>
-                                <div className="product-description">
-                                    <p>
-                                        {appliance.brand} {appliance.series} {appliance.description}
-                                    </p>
-                                </div>
-                                {appliance.is_quick_ship ?
-                                    (
-                                        <img
-                                            className="img img-raised round-radius"
-                                            src="quickship-pdp.png"
-                                            width="79"
-                                            height="19"
-                                        ></img>
-                                    )
-                                    : (<></>)
-                                }
-                                <p className="product-price">
-                                    ${appliance.prices.final}
-                                </p>
-                                <div className="discounts-bar">
-                                    <p className="product-discount">
-                                        Save ${appliance.prices.list_price - appliance.prices.final}
-                                    </p>
-                                    <p className="product-listprice">
-                                        ${appliance.prices.list_price}
-                                    </p>
-                                </div>
-
+            <div className="container products-display">
+                {appliances.map(appliance => {
+                    return (
+                        <div className="product-card">
+                            <div className="product-image">
+                                <img
+                                    className="img img-raised round-radius"
+                                    src={`https://assets.ajmadison.com/${appliance.image.folder}/${appliance.image.filename}.jpg`}
+                                    width="305"
+                                    height="204"
+                                ></img>
                             </div>
-                        )
-                    })}
+                            <div className="product-description">
+                                <p>
+                                    {appliance.brand}
+                                    {appliance.series}
+                                    {appliance.description}
+                                </p>
+                            </div>
+                            {appliance.is_quick_ship ?
+                                (
+                                    <img
+                                        className="img"
+                                        src="quickship-pdp.png"
+                                        width="79"
+                                        height="19"
+                                    ></img>
+                                )
+                                : (<></>)
+                            }
+                            <p className="product-price">
+                                ${appliance.prices.final}
+                            </p>
+                            <div className="discounts-bar">
+                                <p className="product-discount">
+                                    {`Save $${(Math.round((appliance.prices.list_price - appliance.prices.final) *100) /100).toFixed(2)}`}
+                                </p>
+                                <p className="product-listprice">
+                                    {`$${(Math.round(appliance.prices.list_price *100) /100).toFixed(0)}.99`}
+                                </p>
+                            </div>
 
-                </div>
+                            <div className="btn cta-btn">
+                                <button>
+                                    View Package
+                                </button>
+                            </div>
+
+                        </div>
+                    )
+                })}
+
             </div>
-
 
         </div>
     );
