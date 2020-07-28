@@ -1,65 +1,32 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-
-export default function Home() {
+const Index = props => {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      <React.Fragment>
+        <h1>Drumroll pls... API res:</h1>
+        {JSON.stringify(props.products)}
+      </React.Fragment>
+  );
 }
+
+/**
+ * @Omar Ong: I'm choosing the NextJS method *getServerSideProps* - which fetches data at request time - as I imagine that appliance/product inventory and other datapoints can change dynamically throughout the day -- otherwise if the data would be more static, I will use getStaticProps since one time fetch and caching static props will be more economical on the api side.
+ */
+export async function getServerSideProps() {
+
+  /**
+   * @Omar: btw the provided api url results in only "is_quick_ship: false" SKUs
+   * const res = await fetch(`https://demo3211013.mockable.io/ajmad`)
+   *
+   * Thus, to confirm my UI, I tweaked the JSON a bit and set several SKU items as Quickship products
+   * of course I can do local dummy data, but mockable is fun....
+   */
+  const res = await fetch(`https://demo4893163.mockable.io/`)
+  const data = await res.json()
+
+  return {
+    props: {
+      products: data
+    },
+  }
+}
+
+export default Index;
