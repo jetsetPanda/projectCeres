@@ -8,7 +8,7 @@ function Products({productList}) {
     const updateApplianceList = (list) => setApplianceList(list);
 
     const [showMore, setShowMore] = React.useState(false);
-    const showMoreClicked = () => setShowMore(true)
+    const showMoreClicked = () => setShowMore(!showMore);
 
     const [isQuickShip, setIsQuickShip] = React.useState(false);
     const toggleQuickShip = () => setIsQuickShip(!isQuickShip);
@@ -20,11 +20,11 @@ function Products({productList}) {
         const quickShipOnly = () => { return productList.filter(sku =>
             sku.is_quick_ship === true
         )};
-
-        let filterResults = isQuickShip ? quickShipOnly() : productList;
+        let filterQuickShip = isQuickShip ? quickShipOnly() : productList;
+        let filterResults = showMore ? filterQuickShip : filterQuickShip.slice(0,6);
 
         updateApplianceList(filterResults);
-    }, [isQuickShip]);
+    }, [isQuickShip, showMore]);
 
 
     return (
@@ -98,19 +98,21 @@ function Products({productList}) {
             <div className="container products-display">
                 <ProductsDisplay list={applianceList}/>
 
-                {/*{ showMore ? <ProductsDisplay list={moreAppliances}/> : (<></>)}*/}
-
             </div>
 
-            { !showMore ? (
-                <div className="btn more-btn">
-                    <button
-                        onClick={showMoreClicked}
-                    >
-                        Show More
-                    </button>
-                </div>
-            ) : (<></>)}
+            <div className="btn more-btn">
+                <button
+                    onClick={showMoreClicked}
+                >
+                    { showMore ? (
+                        <>Show Less</>
+                    ) : (
+                        <>Show More</>
+                        )
+                    }
+                </button>
+            </div>
+
 
 
         </div>
