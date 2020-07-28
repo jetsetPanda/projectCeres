@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from "../components/Header";
+import ProductDescription from "../components/ProductDescription";
 
 function Products({productList}) {
 
@@ -80,17 +81,15 @@ function Products({productList}) {
                         <div className="product-card">
                             <div className="product-image">
                                 <img
-                                    className="img img-raised round-radius"
+                                    className="img"
                                     src={`https://assets.ajmadison.com/${appliance.image.folder}/${appliance.image.filename}.jpg`}
                                     width="305"
                                     height="204"
                                 ></img>
                             </div>
                             <div className="product-description">
-                                <p>
-                                    {appliance.brand}
-                                    {appliance.series}
-                                    {appliance.description}
+                                <p><span className="brand">{appliance.brand}</span>
+                                    <ProductDescription data={appliance} />
                                 </p>
                             </div>
                             {appliance.is_quick_ship ?
@@ -102,7 +101,7 @@ function Products({productList}) {
                                         height="19"
                                     ></img>
                                 )
-                                : (<></>)
+                                : (<div className="blanq"></div>)
                             }
                             <p className="product-price">
                                 ${appliance.prices.final}

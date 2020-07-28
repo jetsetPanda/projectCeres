@@ -1,8 +1,9 @@
+import Products from "./products";
+
 const Index = props => {
   return (
       <React.Fragment>
-        <h1>Drumroll pls... API res:</h1>
-        {JSON.stringify(props.products)}
+        <Products productList={props.productList}/>
       </React.Fragment>
   );
 }
@@ -24,7 +25,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      products: data
+      productList: data
     },
   }
 }
