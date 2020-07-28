@@ -1,16 +1,23 @@
 import React from 'react';
 import Header from "../components/Header";
-import ProductDescription from "../components/ProductDescription";
+import ProductsDisplay from "../components/ProductsDisplay";
 
 function Products({productList}) {
+    // const appliances = productList;
+    const appliances = productList.slice(0,12);
+    const moreAppliances = productList.slice(12, (productList.length + 1));
+    console.log(appliances);
+    console.log(moreAppliances);
 
-    const appliances = productList;
+    const [showMore, setShowMore] = React.useState(false);
+
+    const [isQuickShip, setIsQuickShip] = React.useState(false);
 
     let applianceCategory = ['Gas Ranges', 'Vacuum Cleaners', 'Toaster Ovens'];
     let sortCriteria = ['Highest Price', 'Lowest Price', 'Top Rated', 'Best Sellers', 'In Stock' ]
 
     return (
-        <div>
+        <div className="wrapper">
             <Header/>
 
             <div className="filter-bar">
@@ -60,8 +67,10 @@ function Products({productList}) {
                                 htmlFor="sort-criteria">Delivery Method:
                             </label>
                             <div className="quickship-toggle">
-                                <input type="checkbox" id="quickship-toggle" name="quickship-toggle"
-                                       value="isQuickship"/>
+                                <input
+                                    type="checkbox"
+                                    onClick={() => setIsQuickShip(!isQuickShip)}
+                                />
                                 <label htmlFor="quickship-toggle"> Quick Ship</label>
                             </div>
                         </div>
@@ -76,56 +85,24 @@ function Products({productList}) {
             </div>
 
             <div className="container products-display">
-                {appliances.map(appliance => {
-                    return (
-                        <div className="product-card">
-                            <div className="product-image">
-                                <img
-                                    className="img"
-                                    src={`https://assets.ajmadison.com/${appliance.image.folder}/${appliance.image.filename}.jpg`}
-                                    width="305"
-                                    height="204"
-                                ></img>
-                            </div>
-                            <div className="product-description">
-                                <p><span className="brand">{appliance.brand}</span>
-                                    <ProductDescription data={appliance} />
-                                </p>
-                            </div>
-                            {appliance.is_quick_ship ?
-                                (
-                                    <img
-                                        className="img"
-                                        src="quickship-pdp.png"
-                                        width="79"
-                                        height="19"
-                                    ></img>
-                                )
-                                : (<div className="blanq"></div>)
-                            }
-                            <p className="product-price">
-                                ${appliance.prices.final}
-                            </p>
-                            <div className="discounts-bar">
-                                <p className="product-discount">
-                                    {`Save $${(Math.round((appliance.prices.list_price - appliance.prices.final) *100) /100).toFixed(2)}`}
-                                </p>
-                                <p className="product-listprice">
-                                    {`$${(Math.round(appliance.prices.list_price *100) /100).toFixed(0)}.99`}
-                                </p>
-                            </div>
-
-                            <div className="btn cta-btn">
-                                <button>
-                                    View Package
-                                </button>
-                            </div>
-
-                        </div>
-                    )
-                })}
+                { !isQuickShip ?
+                    <ProductsDisplay list={appliances}/>
+                    : (<></>)
+                }
+                { showMore ? <ProductsDisplay list={moreAppliances}/> : (<></>)}
 
             </div>
+
+            { !showMore ? (
+                <div className="btn more-btn">
+                    <button
+                        onClick={() => setShowMore(true)}
+                    >
+                        Show More
+                    </button>
+                </div>
+            ) : (<></>)}
+
 
         </div>
     );
