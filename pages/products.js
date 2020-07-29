@@ -1,31 +1,43 @@
 import React from 'react';
 import Header from "../components/Header";
-import ProductsDisplay from "../components/ProductsDisplay";
+import ProductCard from "../components/ProductCard";
 
 function Products({productList}) {
 
-    const [applianceList, setApplianceList] = React.useState(productList);
+    const initState = {
+        applianceList : productList,
+        showMore : false,
+        isQuickship : false,
+    }
+
+    const [applianceList, setApplianceList] = React.useState(initState.applianceList);
     const updateApplianceList = (list) => setApplianceList(list);
 
-    const [showMore, setShowMore] = React.useState(false);
+    const [showMore, setShowMore] = React.useState(initState.showMore);
     const showMoreClicked = () => setShowMore(!showMore);
 
-    const [isQuickShip, setIsQuickShip] = React.useState(false);
+    const [isQuickShip, setIsQuickShip] = React.useState(initState.isQuickship);
     const toggleQuickShip = () => setIsQuickShip(!isQuickShip);
 
-    let applianceCategory = ['Gas Ranges', 'Vacuum Cleaners', 'Toaster Ovens'];
-    let sortCriteria = ['Highest Price', 'Lowest Price', 'Top Rated', 'Best Sellers', 'In Stock' ]
+    let applianceCategory = ['All', 'Cooktop', 'Dishwasher', 'Microwave', 'Range', 'Range Hood', 'Refrigerator', 'Wall Oven'];
+
+    let sortCriteria = ['Highest Price', 'Lowest Price'];
+
+    const getQuickShipItems = (list) => { return list.filter(sku =>
+        sku.is_quick_ship === true
+    )};
+
+    // const sortByPrice = () => {
+    //     let sortedItems = [...applianceList].sort((a,b) => {
+    //         return
+    //     })
+    // }
 
     React.useEffect(() => {
-        const quickShipOnly = () => { return productList.filter(sku =>
-            sku.is_quick_ship === true
-        )};
-        let filterQuickShip = isQuickShip ? quickShipOnly() : productList;
-        let filterResults = showMore ? filterQuickShip : filterQuickShip.slice(0,6);
-
+        let filterQuickShip = isQuickShip ? getQuickShipItems(productList) : productList;
+        let filterResults = showMore ? filterQuickShip : filterQuickShip.slice(0,8);
         updateApplianceList(filterResults);
     }, [isQuickShip, showMore]);
-
 
     return (
         <div className="wrapper">
@@ -40,19 +52,18 @@ function Products({productList}) {
                             <select
                                 name="select-appliance-dropdown" id="select-appliance"
                             >
-                                {applianceCategory.map((option, index) => {
+                                {applianceCategory.map((category, index) => {
                                     return (
                                         <option
                                             key={index}
-                                            value={option}
+                                            value={category}
                                         >
-                                            {option}
+                                            {category}
                                         </option>
                                     )
                                 })}
                             </select>
                         </div>
-
                         <div className="filter-item">
                             <label
                                 htmlFor="sort-criteria">Sort By:
@@ -65,6 +76,7 @@ function Products({productList}) {
                                         <option
                                             key={index}
                                             value={option}
+                                            // onClick={sortByPrice}
                                         >
                                             {option}
                                         </option>
@@ -87,17 +99,17 @@ function Products({productList}) {
                         </div>
                     </div>
                     <div className="btn clear-btn">
-                        <button>
+                        <button
+                            // onClick={handleClearAll}
+                        >
                             Clear All
                         </button>
                     </div>
                 </div>
-
             </div>
 
             <div className="container products-display">
-                <ProductsDisplay list={applianceList}/>
-
+                <ProductCard list={applianceList}/>
             </div>
 
             <div className="btn more-btn">
