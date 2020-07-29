@@ -1,9 +1,9 @@
-import Products from "./products";
+import ProductsSection from "../components/ProductsSection";
 
 const Index = props => {
   return (
       <React.Fragment>
-        <Products productList={props.productList}/>
+        <ProductsSection productList={props.productList}/>
       </React.Fragment>
   );
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from "../components/Header";
-import ProductCard from "../components/ProductCard";
+import Header from "./Header";
+import ProductCard from "./ProductCard";
 
-function Products({productList}) {
+function ProductsSection({productList}) {
 
     const initState = {
         applianceList : productList,
@@ -132,4 +132,4 @@ function Products({productList}) {
 
 }
 
-export default Products;
+export default ProductsSection;
