@@ -1,6 +1,6 @@
-## [Demo: NextJS Product Page](https://.com)
+## [Demo: NextJS Product Page](https://fe-assignment-ompv24rt9.vercel.app/)
 ######*by: Omar Ong*
-##### Deployed Link: [https://demo.com](https://.com)
+##### Deployed Link: [https://fe-assignment-ompv24rt9.vercel.app/](https://fe-assignment-ompv24rt9.vercel.app/)
 
 ___
 ### Highlights
