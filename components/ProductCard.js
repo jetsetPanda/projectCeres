@@ -33,9 +33,6 @@ const DiscountBar = styled.div`
     justify-content: flex-start;
     width: 100%
 `
-const Brand = styled.span`
-    font-weight: 700
-`
 const ProductPrice = styled.p`
     font-weight: 700;
     font-size: 20px;
@@ -75,9 +72,6 @@ return (
 
                 <div className="product-description">
                     <p>
-                        <Brand>
-                            {appliance.brand}
-                        </Brand>
                         <ProductDescription data={appliance} />
                     </p>
                 </div>
