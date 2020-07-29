@@ -1,6 +1,6 @@
-## [Demo: NextJS Product Page](https://fe-assignment-ompv24rt9.vercel.app/)
+## [Demo: NextJS Product Page](https://fe-assignment-umber.vercel.app/)
 ######*by: Omar Ong*
-##### Deployed Link: [https://fe-assignment-ompv24rt9.vercel.app/](https://fe-assignment-ompv24rt9.vercel.app/)
+##### Deployed Link: [https://fe-assignment-umber.vercel.app/](https://fe-assignment-umber.vercel.app/)
 
 ___
 ### Highlights
@@ -16,6 +16,7 @@ ___
 - **Quickship Filter Toggle** is implemented (useEffect hook)
 - enabled three row line for product description, append ellipses for concatenated lengthier descriptions, see `ProductDescription.js`
 - **Show More / Show Less** button functionality implemented w/ quickship
+- crucial feature (favicon...)
 
 
 ---
