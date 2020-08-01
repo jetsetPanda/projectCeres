@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "./Header";
 import ProductCard from "./ProductCard";
+import ScreenSizeContext from "../context/ScreenSizeContext";
 
 function ProductsSection({productList}) {
 
@@ -8,6 +9,11 @@ function ProductsSection({productList}) {
         applianceList : productList,
         showMore : false,
         isQuickship : false,
+    }
+
+    const useCurrentViewport = () => {
+        const { viewportWidth, viewportHeight } = React.useContext(ScreenSizeContext);
+        return {viewportWidth,viewportHeight};
     }
 
     const [applianceList, setApplianceList] = React.useState(initState.applianceList);
@@ -39,74 +45,88 @@ function ProductsSection({productList}) {
         updateApplianceList(filterResults);
     }, [isQuickShip, showMore]);
 
+    const { viewportWidth } = useCurrentViewport();
+    const responsiveBreakpoint = 620;
+
     return (
-        <div className="wrapper">
+        <React.Fragment>
             <Header/>
 
-            <div className="filter-bar">
-                <div className="container filter-bar-group">
-                    <div className="filter-group">
-                        <div className="filter-item">
-                            <label
-                                htmlFor="select-appliance">Select Appliances:</label>
-                            <select
-                                name="select-appliance-dropdown" id="select-appliance"
-                            >
-                                {applianceCategory.map((category, index) => {
-                                    return (
-                                        <option
-                                            key={index}
-                                            value={category}
-                                        >
-                                            {category}
-                                        </option>
-                                    )
-                                })}
-                            </select>
-                        </div>
-                        <div className="filter-item">
-                            <label
-                                htmlFor="sort-criteria">Sort By:
-                            </label>
-                            <select
-                                name="select-sort-criteria" id="select-sort-criteria"
-                            >
-                                {sortCriteria.map((option, index) => {
-                                    return (
-                                        <option
-                                            key={index}
-                                            value={option}
-                                            // onClick={sortByPrice}
-                                        >
-                                            {option}
-                                        </option>
-                                    )
-                                })}
-                            </select>
-                        </div>
+            {
+                viewportWidth <= responsiveBreakpoint ? (
+                    <div className="filter-bar-mobile container">
+                        <h1>I'M MOBILE!!</h1>
+                    </div>
+                ) : (
+                    <div className="filter-bar-desktop">
+                        <div className="container filter-bar-group">
+                            <div className="filter-group">
+                                <div className="filter-item">
+                                    <label
+                                        htmlFor="select-appliance">Select Appliances:</label>
+                                    <select
+                                        name="select-appliance-dropdown" id="select-appliance"
+                                    >
+                                        {applianceCategory.map((category, index) => {
+                                            return (
+                                                <option
+                                                    key={index}
+                                                    value={category}
+                                                >
+                                                    {category}
+                                                </option>
+                                            )
+                                        })}
+                                    </select>
+                                </div>
+                                <div className="filter-item">
+                                    <label
+                                        htmlFor="sort-criteria">Sort By:
+                                    </label>
+                                    <select
+                                        name="select-sort-criteria" id="select-sort-criteria"
+                                    >
+                                        {sortCriteria.map((option, index) => {
+                                            return (
+                                                <option
+                                                    key={index}
+                                                    value={option}
+                                                    // onClick={sortByPrice}
+                                                >
+                                                    {option}
+                                                </option>
+                                            )
+                                        })}
+                                    </select>
+                                </div>
 
-                        <div className="quickship">
-                            <label
-                                htmlFor="sort-criteria">Delivery Method:
-                            </label>
-                            <div className="quickship-toggle">
-                                <input
-                                    type="checkbox"
-                                    onClick={toggleQuickShip}
-                                />
-                                <label htmlFor="quickship-toggle"> Quick Ship</label>
+                                <div className="quickship">
+                                    <label
+                                        htmlFor="sort-criteria">Delivery Method:
+                                    </label>
+                                    <div className="quickship-toggle">
+                                        <input
+                                            type="checkbox"
+                                            onClick={toggleQuickShip}
+                                        />
+                                        <label htmlFor="quickship-toggle"> Quick Ship</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="btn clear-btn">
+                                <button
+                                    // onClick={handleClearAll}
+                                >
+                                    Clear All
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div className="btn clear-btn">
-                        <button
-                            // onClick={handleClearAll}
-                        >
-                            Clear All
-                        </button>
-                    </div>
-                </div>
-            </div>
+                )
+            }
+
+
+
 
             <div className="container products-display">
                 <ProductCard list={applianceList}/>
@@ -127,7 +147,7 @@ function ProductsSection({productList}) {
 
 
 
-        </div>
+        </React.Fragment>
     );
 
 }
