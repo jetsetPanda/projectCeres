@@ -3,7 +3,6 @@ import Accordion from "./Accordion";
 
 const ModalContainer = styled.div`
     background: #FFFFFF;
-    //background: rgba(3,122,85,0.38);
     bottom: 0;
     left: 0;
     overflow: auto;

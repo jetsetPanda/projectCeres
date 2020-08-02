@@ -8,9 +8,10 @@ const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-content: flex-start;
+    align-items: center;
 `
 const MobileCard = styled.div`
+    max-width: 700px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -21,6 +22,7 @@ const MobileColumn = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-left: 25px;
 `
 const ApplianceImage = styled.img`
     width: 157px;
@@ -93,11 +95,9 @@ const MobileProductCard = props => {
                 return (
                     <CardContainer>
                         <MobileCard>
-                            <MobileColumn>
-                                <ApplianceImage
-                                    src={`https://assets.ajmadison.com/${appliance.image.folder}/${appliance.image.filename}.jpg`}
-                                />
-                            </MobileColumn>
+                            <ApplianceImage
+                                src={`https://assets.ajmadison.com/${appliance.image.folder}/${appliance.image.filename}.jpg`}
+                            />
                             <MobileColumn>
                                 <ProductPrice>
                                     {`$ ${(Math.round((appliance.prices.final) *100) /100).toFixed(2)}`}
@@ -111,18 +111,18 @@ const MobileProductCard = props => {
                                     </ProductListPrice>
                                 </DiscountBar>
 
-                                <Description>
-                                    <MobileProductDescription data={appliance} />
-                                </Description>
+                                    <Description>
+                                        <MobileProductDescription data={appliance} />
+                                    </Description>
 
-                                {appliance.is_quick_ship ?
-                                    (
-                                        <Quickship
-                                            src="quickship-pdp.png"
-                                        />
-                                    )
-                                    : (" ")
-                                }
+                                    {appliance.is_quick_ship ?
+                                        (
+                                            <Quickship
+                                                src="quickship-pdp.png"
+                                            />
+                                        )
+                                        : (" ")
+                                    }
 
                             </MobileColumn>
                         </MobileCard>
