@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import styled from "styled-components";
+import Accordion from "./Accordion";
 
 const ModalContainer = styled.div`
     background: #FFFFFF;
@@ -20,7 +21,7 @@ const ModalWrapper = styled.div`
     background: #FFFFFF;
     //background: coral
 `
-const ModalRow = styled.div`
+export const ModalRow = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -33,20 +34,19 @@ const ModalRow = styled.div`
     }
 `
 const CloseButton = styled.img`
-    width: 27px;
-    height: 27px
+    width: 25px;
+    height: 25px
 `
-const HorderLine = styled.hr`
-    //...feels like im goin to lose my mind (madonna song)... ugh
-    border: 1px solid #F0EDED;
-    margin: 2px 0;
-`
-const ModalLabel = styled.p`
+
+export const ModalLabel = styled.p`
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
 `
-
+const Select =styled.select`
+  width: 300px;
+  height: 45px
+`
 const FilterButtonRow = styled.div`
   width: 100%;
   display: flex;
@@ -64,40 +64,15 @@ const FilterButton = styled.button`
     padding: 0;
     margin: 0;
 `
-const AccordionToggle = styled.img`
-    width: 12px;
-    height: 12px;
+
+export const HorderLine = styled.hr`
+    //...feels like im goin to lose my mind (madonna song)... ugh
+    border: 1px solid #F0EDED;
+    margin: 2px 0;
 `
+const categories = ['Refrigerators', 'Cooktop', 'Dishwasher', 'Microwave', 'Range', 'Range Hood', 'Wall Oven'];
 
-// opacity: ${props => {
-//     switch (props.fadeType) {
-//         case "in":
-//             return "1";
-//         default:
-//             return "0";
-//     }
-// }};
-// transition: ${props => {
-//     switch (props.fadeType) {
-//         case "in":
-//             return `opacity linear 0.25s;`;
-//         case "out":
-//             return `opacity linear 0.25s;`;
-//         default:
-//             return "";
-//     }
-// }};
-
-function Modal({ onToggleModal }) {
-
-    const [categoryOpen, setCategoryOpen] = useState(false);
-    const toggleCategoryOpen = setCategoryOpen(!categoryOpen);
-
-    const [quickshipOpen, setQuickshipOpen] = useState(false);
-    const toggleQuickshipOpen = setQuickshipOpen(!quickshipOpen);
-
-    let categories = ['Refrigerators', 'Cooktop', 'Dishwasher', 'Microwave', 'Range', 'Range Hood', 'Wall Oven'];
-
+const Modal = ({ onToggleModal }) => {
     return(
         <ModalContainer>
             <ModalWrapper>
@@ -111,7 +86,10 @@ function Modal({ onToggleModal }) {
                 <HorderLine/>
 
                 <ModalLabel>Sort By:</ModalLabel>
-
+                <Select>
+                    <option>Highest Price</option>
+                    <option>Lowest Price</option>
+                </Select>
                 <ModalLabel>Filter By:</ModalLabel>
                 <FilterButtonRow>
                     <FilterButton bg='#FFFFFF'>
@@ -122,26 +100,15 @@ function Modal({ onToggleModal }) {
                     </FilterButton>
                 </FilterButtonRow>
 
-                <ModalRow>
-                    <ModalLabel>Appliance Type</ModalLabel>
-                    <AccordionToggle
-                        // onClick={toggleCategoryOpen}
-                        src={ categoryOpen ? "minus.png" : "plus.png"}
-                    />
-                </ModalRow>
-                { !categoryOpen && <HorderLine/> }
-                {/*{ categoryOpen && <h1>OPEN SESAME</h1>*/}
-                {/*}*/}
+                <Accordion
+                    label="Appliance Type"
+                    content={categories}
+                />
 
-                {/*<ModalRow>*/}
-                {/*    <ModalLabel>Delivery Type</ModalLabel>*/}
-                {/*    <AccordionToggle*/}
-                {/*        onClick={toggleQuickshipOpen}*/}
-                {/*        src={ quickshipOpen ? "minus.png" : "plus.png"}*/}
-                {/*    />*/}
-                {/*</ModalRow>*/}
-                {/*{ !quickshipOpen && <HorderLine/>}*/}
-                {/*{ quickshipOpen && <h1>QUICKSHIP MEEE</h1>}*/}
+                <Accordion
+                    label="Delivery Type"
+                    content={['Quick Ship']}
+                />
 
             </ModalWrapper>
         </ModalContainer>
@@ -149,22 +116,3 @@ function Modal({ onToggleModal }) {
 }
 
 export default Modal
-
-//
-// (
-//     categories.map((category, index) => {
-//         return (
-//             <React.Fragment>
-//                 <input
-//                     type="checkbox"
-//                 />
-//                 <label
-//                     key={index}
-//                     value={category}
-//                 >
-//                     {category}
-//                 </label>
-//             </React.Fragment>
-//         )
-//     })
-// )

@@ -97,7 +97,8 @@ function ProductsSection({productList}) {
 
                         { showModal &&
                             <Modal
-                                onToggleModal={toggleModal}/>
+                                onToggleModal={toggleModal}
+                            />
                         }
 
                     </Wrapper>
