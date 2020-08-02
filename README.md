@@ -1,4 +1,4 @@
-## [Demo: NextJS Responsive Page](https://fe-assignment-umber.vercel.app/)
+## Deployed:[ NextJS Responsive Page](https://nextjs-responsive.vercel.app/)
 *by: Omar Ong*
 
 
