@@ -4,6 +4,7 @@ import Header from "./Header";
 import ProductCard from "./ProductCard";
 import ScreenSizeContext from "../context/ScreenSizeContext";
 import MobileProductCard from "./MobileProductCard";
+import Modal from "./Modal";
 
 function ProductsSection({productList}) {
 
@@ -11,13 +12,14 @@ function ProductsSection({productList}) {
         applianceList : productList,
         showMore : false,
         isQuickship : false,
+        showModal : false
     }
 
     const useCurrentViewport = () => {
         const { viewportWidth, viewportHeight } = React.useContext(ScreenSizeContext);
         // Omar: for my purposes I am currently only concerned with viewport width, thus:
         return (viewportWidth < responsiveBreakpoint) ? "mobile" : "desktop";
-        //otherwise:
+        //otherwise for more use cases for my custom hook, return the ff:
         // return {viewportWidth,viewportHeight};
     }
 
@@ -25,12 +27,21 @@ function ProductsSection({productList}) {
     const updateApplianceList = (list) => setApplianceList(list);
 
     const [showMore, setShowMore] = React.useState(initState.showMore);
-    const showMoreClicked = () => setShowMore(!showMore);
+    const showMoreClicked = (e) => {
+        e.preventDefault();
+        setShowMore(!showMore);
+    }
 
     const [isQuickShip, setIsQuickShip] = React.useState(initState.isQuickship);
     const toggleQuickShip = () => setIsQuickShip(!isQuickShip);
 
-    let applianceCategory = ['All', 'Cooktop', 'Dishwasher', 'Microwave', 'Range', 'Range Hood', 'Refrigerator', 'Wall Oven'];
+    const [showModal, setShowModal] = React.useState(initState.showModal);
+    const toggleModal = (e) => {
+        e.preventDefault();
+        setShowModal(!showModal);
+    }
+
+    let applianceCategory = ['Refrigerators', 'Cooktop', 'Dishwasher', 'Microwave', 'Range', 'Range Hood', 'Wall Oven'];
 
     let sortCriteria = ['Highest Price', 'Lowest Price'];
 
@@ -61,7 +72,9 @@ function ProductsSection({productList}) {
             {
                 currentViewport === 'mobile' ? (
                     <Wrapper>
-                        <MobileSortCTA>
+                        <MobileSortCTA
+                            onClick={toggleModal}
+                        >
                             SORT & FILTER
                         </MobileSortCTA>
                         <MobileResultsCounter>
@@ -82,9 +95,12 @@ function ProductsSection({productList}) {
                             </button>
                         </MobileMoreButton>
 
+                        { showModal &&
+                            <Modal
+                                onToggleModal={toggleModal}/>
+                        }
+
                     </Wrapper>
-
-
 
                 ) : (
                     <React.Fragment>
@@ -175,15 +191,12 @@ function ProductsSection({productList}) {
                                 </button>
                             </div>
                         </Wrapper>
+
+
+
                     </React.Fragment>
                 )
-
             }
-
-
-
-
-
 
         </React.Fragment>
     );
@@ -192,7 +205,7 @@ function ProductsSection({productList}) {
 
 const Wrapper = styled.div`
   width: 90vw;
-    margin: 0 auto
+  margin: 0 auto
 `
 const MobileSortCTA = styled.button`
     width: 100%;
@@ -209,6 +222,7 @@ const MobileResultsCounter = styled.p`
     line-height: 14px;
     color: #222222;
 `
+
 
 const MobileMoreButton = styled.div`
     text-align: center;
@@ -230,7 +244,6 @@ const MobileMoreButton = styled.div`
         color: #FFFFFF;
     }
 `
-
 
 
 export default ProductsSection;

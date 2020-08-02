@@ -29,15 +29,8 @@ const ApplianceImage = styled.img`
 const Quickship = styled.img`
     width: 74px;
     height: 18px;
-    margin: 0;
+    margin: 5px 0;
     padding: 0;
-`
-const NotQuickship = styled.div`
-    width: 73px;
-    height: 15px;
-    background: white;
-    margin: 0;
-    padding: 0
 `
 const DiscountBar = styled.div`
     display: flex;
@@ -72,7 +65,7 @@ const Description = styled.p`
     font-size: 12px;
     font-weight: 500;
     line-height: 14px;
-    margin: 5px 0;
+    margin: 2px 0;
 `
 
 const MobileProductDescription = props => {
@@ -128,7 +121,7 @@ const MobileProductCard = props => {
                                             src="quickship-pdp.png"
                                         />
                                     )
-                                    : (<NotQuickship/>)
+                                    : (" ")
                                 }
 
                             </MobileColumn>
