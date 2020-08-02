@@ -246,5 +246,4 @@ const MobileMoreButton = styled.div`
     }
 `
 
-
 export default ProductsSection;
