@@ -1,7 +1,6 @@
 ## Deployed:[ NextJS Responsive Page](https://nextjs-responsive.vercel.app/)
 *by: Omar Ong*
 
-
 ___
 ### Highlights
 
@@ -24,7 +23,7 @@ ___
 - crucial feature (favicon...)
 
 ---
-###What Could Be Done Further (*time permitting*)
+### What Could Be Done Further (*time permitting*)
 
 - implement dropdown multi checkbox select filter, and clear all button functionality (!)
 - cleanup CSS and layout
@@ -32,3 +31,11 @@ ___
 - improved UX, e.g. animated cues (mobile modal ease, scroll up/down onclick Show More, button hover states, etc)
 - create unit tests (Jest)
 - annotate or build components in bit.dev or Storybook
+
+---
+### Instructions: Make App Run Locally
+
+1. Clone this repository `git@github.com:jetsetPanda/fe-assignment.git`.
+2. In your terminal - navigate to root folder and enter `npm install` to install dependencies.
+3. Enter `next dev` in terminal to open a live dev server.
+4. Further information can be found in the NextJS documentation: `https://nextjs.org/docs/getting-started`
