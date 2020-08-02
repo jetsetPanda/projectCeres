@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import getStyles from "../styles/styles_constant";
 
 // styled components
 const Container = styled.div`
@@ -24,33 +25,14 @@ const HeaderCaption = styled.p`
 
 const Header = (props) => {
 
-    const styles = (props.viewport === 'mobile') ? {
-        h1: {
-            size: '25px',
-            lineH: '29px'
-        },
-        p: {
-            size: '12px',
-            lineH: '15px'
-        }
-
-    } : {
-        h1: {
-            size: '40px',
-            lineH: '47px'
-        },
-        p: {
-            size: '20px',
-            lineH: '23px'
-        }
-    };
+    const styles = getStyles(props);
 
     return (
         <React.Fragment>
             <div className="container">
                 <Container>
                     <HeaderText style={styles}>Appliance Packages</HeaderText>
-                    <HeaderCaption style={styles}>Looking for a great deal on home appliances? Packages are the best bet. Most appliance packages consist of a range, refrigerator, over-the-range microwave, and dishwasher. However, some upscale brands have packages that incorporate wall ovens, cooktops, and integrated refrigerators. </HeaderCaption>
+                    <HeaderCaption style={styles}>{styles.pCopy}</HeaderCaption>
                 </Container>
             </div>
 
