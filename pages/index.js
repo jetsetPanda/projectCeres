@@ -1,11 +1,8 @@
 import ProductsSection from "../components/ProductsSection";
-import styled from "styled-components";
 
 const Index = props => {
   return (
-        <Wrapper>
           <ProductsSection productList={props.productList}/>
-        </Wrapper>
   );
 }
 
@@ -31,9 +28,6 @@ export async function getServerSideProps() {
   }
 }
 
-const Wrapper = styled.div`
-  width: 90vw;
-    margin: 0 auto
-`
+
 
 export default Index;
