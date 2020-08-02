@@ -6,6 +6,7 @@ ___
 ### Highlights
 
 - Built on NextJS framework - Deployed to Vercel
+- **"Custom" Build**: only dependencies are Next, React, SASS and Styled-Components. I created my own hooks for viewport observer and context api to manage viewport state
 - Modern React:
   >hooks, statelful/less functional components ("no-class" approach, just like facebook wants us to do...) and fetch api used
 - CSS Frameworks: 
