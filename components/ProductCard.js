@@ -84,7 +84,7 @@ return (
                     : (<NotQuickship/>)
                 }
                 <ProductPrice>
-                    ${appliance.prices.final}
+                    {`$ ${(Math.round((appliance.prices.final) *100) /100).toFixed(2)}`}
                 </ProductPrice>
                 <DiscountBar>
                     <ProductDiscount>

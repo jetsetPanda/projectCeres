@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "./Header";
 import ProductCard from "./ProductCard";
 import ScreenSizeContext from "../context/ScreenSizeContext";
+import MobileProductCard from "./MobileProductCard";
 
 function ProductsSection({productList}) {
 
@@ -60,9 +61,29 @@ function ProductsSection({productList}) {
             {
                 currentViewport === 'mobile' ? (
                     <Wrapper>
-                        <h2>Mobile Filter Button</h2>
-                        <h1>MOBILE STUFF!</h1>
+                        <MobileSortCTA>
+                            SORT & FILTER
+                        </MobileSortCTA>
+                        <MobileResultsCounter>
+                            (1-{applianceList.length} of {productList.length} items)
+                        </MobileResultsCounter>
+                        <MobileProductCard list={applianceList}></MobileProductCard>
+
+                        <MobileMoreButton>
+                            <button
+                                onClick={showMoreClicked}
+                            >
+                                { showMore ? (
+                                    <>SHOW LESS</>
+                                ) : (
+                                    <>SHOW MORE</>
+                                )
+                                }
+                            </button>
+                        </MobileMoreButton>
+
                     </Wrapper>
+
 
 
                 ) : (
@@ -173,5 +194,43 @@ const Wrapper = styled.div`
   width: 90vw;
     margin: 0 auto
 `
+const MobileSortCTA = styled.button`
+    width: 100%;
+    height: 45px;
+    color: #23408A;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid #F0EDED;
+    background: #FBFBFB
+`
+const MobileResultsCounter = styled.p`
+    text-align: right;
+    font-size: 12px;
+    line-height: 14px;
+    color: #222222;
+`
+
+const MobileMoreButton = styled.div`
+    text-align: center;
+    margin-bottom: 40px;
+    
+    button {
+        width: 215px;
+        height: 48px;
+        background: #FFFFFF;
+        border: 1px solid #979797;
+        color: #3B8448;
+        margin: 0 auto;
+        font-size: 15px;
+        font-weight: 700;
+    }
+    
+    button:hover {
+        background: #3B8448;
+        color: #FFFFFF;
+    }
+`
+
+
 
 export default ProductsSection;
