@@ -14,7 +14,13 @@ const getStyles = props => {
             size: '12px',
             lineH: '15px'
         },
-        pCopy: 'Looking for a great deal on home appliances? Packages are the best bet. Most appliance packages consist of a range, refrigerator, over-the-range microwave, and dishwasher. However, some upscale brands have packages that incorporate wall ovens, cooktops, and integrated refrigerators. Use our handy mobile filters to help you narrow down the best package for your needs! '
+        pCopy: 'Looking for a great deal on home appliances? Packages are the best bet. Most appliance packages consist of a range, refrigerator, over-the-range microwave, and dishwasher. However, some upscale brands have packages that incorporate wall ovens, cooktops, and integrated refrigerators.' +
+            '' +
+            '' +
+            '' +
+            '' +
+            '' +
+            'Use our handy mobile filters to help you narrow down the best package for your needs! '
 
 
     } : {
